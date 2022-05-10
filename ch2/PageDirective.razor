@@ -1,0 +1,15 @@
+@page "/author"
+@page "/author/{Name}"
+<h1>Author @authorName </h1>
+
+@code {
+	private string authorName;
+
+  [Parameter]
+	public string Name { get; set; }
+	
+	protected override void OnInitialized()
+	{
+		authorName = Name ?? "Not set";
+  }
+}

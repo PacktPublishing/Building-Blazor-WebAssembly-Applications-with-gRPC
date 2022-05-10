@@ -1,0 +1,15 @@
+@namespace SampleApp.Components
+
+<button @onclick="@OnClickHandler">
+  Click to change color to black
+</button>
+
+@code {
+  [Parameter]
+  public EvenCallback<string> OnClickEvent { get; set; }
+
+  private async Task OnClickHandler()
+  {
+  await OnClickEvent.InvokeAsync("black")
+  }
+}

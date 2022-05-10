@@ -1,0 +1,10 @@
+@namespace SampleApp.Components
+
+<p>Number of clicks: @count</p>
+<button @onclick="@(e => count + 1)">
+  Click me to update counter
+</button>
+
+@code {
+  int count = 0;
+}

@@ -1,0 +1,18 @@
+@namespace SampleApp.Components
+
+<div class="product-list">
+@foreach(var product in products)
+{
+  <Product>
+    <Image>
+      <img src="demo_image.jpg" alt="Demo image" />
+    </Image>
+    <Name>Product name</Name>
+    <Info>Description & Price</Info>
+  </Product>
+}
+</div>
+
+@code {
+  private int[] products = new[] { 1, 2, 3};
+}

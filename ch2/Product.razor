@@ -1,0 +1,19 @@
+@namespace SampleApp.Components
+
+<div class="product">
+  <div class="image">@Image</div>
+  <div class="name">@Name</div>
+  <div class="info">@Info</div> 
+</div>
+
+@code {
+  [Parameter]
+  public RenderFragment Image { get; set; }
+
+  [Parameter]
+  public RenderFragment Name { get; set; }
+
+  [Parameter]
+  public RenderFragment Info { get; set; }
+}
+

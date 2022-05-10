@@ -1,0 +1,12 @@
+@namespace SampleApp.Components
+<Header Title="Color selector" />
+<LikeButton OnClickEvent="@OnClickAction" />
+<p>Selected color is @color</p>
+
+@code {
+  private string color = "white";
+  private void OnClickAction(string args)
+  {
+    color = args;
+  }
+}

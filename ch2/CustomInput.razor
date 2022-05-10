@@ -1,0 +1,18 @@
+<input type="text" @bind="BindingValue" />
+
+@code {
+  [Parameter]
+  public string BindingValue
+  {
+    get => _value;
+    set
+    {
+      if (_value == value ) return;
+      _value = value;
+      BindingValueChanged.InvokeAsync(value);
+    }
+  }
+
+  [Parameter]
+  public EventCallback<string> BindingValueChanged { get; set; }
+}
