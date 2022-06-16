@@ -1,0 +1,17 @@
+﻿@typeparam TModel
+@attribute [CascadingTypeParameter(nameof(TModel))]
+
+<EditForm Model="Model" Context="FormEditContext" OnValidSubmit="SaveItem">
+    <DataAnnotationsValidator />
+    <CascadingValue Value=Model>
+        @ChildContent(Model)
+    </CascadingValue>
+
+    <hr />
+    <button type="submit">Save</button>
+
+@if (!string.IsNullOrWhiteSpace(_errorMessage))
+{
+    <div class="alert alert-danger">@_errorMessage</div>
+}
+</EditForm>

@@ -1,0 +1,13 @@
+﻿@page "/movies/{Id:int}"
+<DataForm ApiPath="movie" Id="Id" TModel="MediaLibrary.Shared.Model.MovieModel" Context="model">
+    <p><label>Name: <InputText @bind-Value="model.Name" /></label></p>
+    <p><label>Name: <InputNumber @bind-Value="model.Year" /></label></p>
+    <p><label>Name: <InputText @bind-Value="model.Description" /></label></p>
+    <p><label>Name: <InputNumber @bind-Value="model.DirectorId" /></label></p>
+    <p><label>Name: <InputNumber @bind-Value="model.MusicComposerId" /></label></p>
+</DataForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}
