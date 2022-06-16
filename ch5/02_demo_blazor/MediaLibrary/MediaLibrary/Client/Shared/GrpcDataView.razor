@@ -1,0 +1,40 @@
+﻿@typeparam TItem
+@typeparam TContractClient
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+<a href="@GetDetailUrl(0)" class="btn btn-secondary">New</a>
+<table class="table table-bordered table-hover table-striped">
+    <thead>
+        <tr>
+            @foreach (var column in Data.Columns)
+            {
+                <th>@column.Name</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <Virtualize Items="@Data.Rows" Context="item">
+            <tr>
+                @foreach (var data in item.Values)
+                {
+                    <td>
+                        @if (data.Value is null)
+                        {
+                            <span>---</span>
+                        }
+                        else
+                        {
+                            @data.Value
+                        }
+                    </td>
+                }
+
+                <td class="is-actions-cell">
+                    <div class="buttons is-right">
+                        <a href="@GetDetailUrl(item.OriginValue.Id)" class="btn btn-primary">Edit</a>
+                    </div>
+                </td>
+            </tr>
+        </Virtualize>
+    </tbody>
+</table>

@@ -1,0 +1,24 @@
+﻿@page "/persons"
+@using MediaLibrary.Shared.Model
+@inject IMapper mapper
+@inject MediaLibrary.Contracts.PersonContract.PersonContractClient client
+@*<DataView ApiPath="person" TItem="MediaLibrary.Shared.Model.PersonModel" />*@
+
+<table>
+    
+</table>
+
+@code {
+    private List<PersonModel> Data { get; set; } = new List<PersonModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var stream = client.GetList(new Contracts.Empty()).ResponseStream;
+
+        while (await stream.MoveNext(default))
+        {
+            var item = mapper.Map<PersonModel>(stream.Current);
+            Data.Add(item);
+        }
+    }
+}
