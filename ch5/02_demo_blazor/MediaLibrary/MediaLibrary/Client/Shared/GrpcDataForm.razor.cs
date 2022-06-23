@@ -55,7 +55,7 @@ namespace MediaLibrary.Client.Shared
             }
             else
             {
-                var response = await Service.UpdateAsync(data);
+                await Service.UpdateAsync(data);
             }
         }
     }
