@@ -1,21 +1,23 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
+using Grpc.Core;
+using MediaLibrary.Contracts;
+using AutoMapper;
 
 namespace MediaLibrary.Client.Shared
 {
-    public partial class GrpcDataForm<TModel>
+    public partial class GrpcDataForm<TModel, TContractItem, TContractClient>
         where TModel : MediaLibrary.Shared.Model.IModel, new()
+        where TContractItem : class, new()
+        where TContractClient : ClientBase<TContractClient>, IContractClient<TContractItem>
     {
-        [Inject]
-        HttpClient Http { get; set; } = null!;
-
         [Inject]
         NavigationManager Navigation { get; set; } = null!;
 
-        [Parameter]
-        [EditorRequired]
-        public string ApiPath { get; set; } = string.Empty;
+        [Inject]
+        public TContractClient Service { get; set; } = null!;
+
+        [Inject]
+        public IMapper Mapper { get; set; } = null!;
 
         [Parameter]
         [EditorRequired]
@@ -34,30 +36,26 @@ namespace MediaLibrary.Client.Shared
 
         private async Task GetModel()
         {
-            Model = await Http.GetFromJsonAsync<TModel>($"rest/{ApiPath}/{Id}") ?? new();
+            var grpcItem = await Service.GetAsync(new ItemRequest { Id = Id }) ?? new();
+            Model = Mapper.Map<TModel>(grpcItem);
         }
 
         private async Task SaveItem()
         {
-            HttpResponseMessage response = Id <= 0 ?
-                await Http.PostAsJsonAsync($"rest/{ApiPath}", Model) :
-                await Http.PutAsJsonAsync($"rest/{ApiPath}/{Id}", Model);
+            var data = Mapper.Map<TContractItem>(Model);
 
-            if (response.IsSuccessStatusCode)
+            if (Id <= 0)
             {
-                if (response.StatusCode == System.Net.HttpStatusCode.Created)
-                {
-                    if (response.Headers.TryGetValues("location", out var urls))
-                    {
-                        Navigation.NavigateTo(urls.First(), replace: true);
-                    }
-                }
+                var response = await Service.CreateAsync(data);
 
-                await GetModel();
+                if (response.Id > 0)
+                {
+                    Navigation.NavigateTo(response.Path, replace: true);
+                }
             }
             else
             {
-                _errorMessage = await response.Content.ReadAsStringAsync();
+                var response = await Service.UpdateAsync(data);
             }
         }
     }
