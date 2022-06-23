@@ -1,3 +1,7 @@
 ﻿@page "/movies"
-
-<DataView ApiPath="movie" TItem="MediaLibrary.Shared.Model.MovieModel" />
+@using MediaLibrary.Contracts
+@using MediaLibrary.Shared.Model
+<GrpcDataView 
+    TItem="MovieModel"
+    TContractItem="Movie" 
+    TContractClient="MovieContract.MovieContractClient"/>

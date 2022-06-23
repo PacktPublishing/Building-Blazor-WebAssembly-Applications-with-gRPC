@@ -9,5 +9,5 @@ public interface IContractService<T>
     Task<GenericResponse> Delete(ItemRequest request, ServerCallContext context);
     Task<T> Get(ItemRequest request, ServerCallContext context);
     Task GetList(Empty request, IServerStreamWriter<T> responseStream, ServerCallContext context);
-    Task<GenericResponse> Update(Person request, ServerCallContext context);
+    Task<GenericResponse> Update(T request, ServerCallContext context);
 }

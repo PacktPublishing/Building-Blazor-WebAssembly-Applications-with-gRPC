@@ -13,5 +13,6 @@ public class SharedMapperProfile : Profile
             .ConvertUsing(x => x.ToDateTime());
 
         CreateMap<Contracts.Person, Model.PersonModel>().ReverseMap();
+        CreateMap<Contracts.Movie, Model.MovieModel>().ReverseMap();
     }
 }

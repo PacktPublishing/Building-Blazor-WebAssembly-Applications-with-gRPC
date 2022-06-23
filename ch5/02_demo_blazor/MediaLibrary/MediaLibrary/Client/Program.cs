@@ -22,4 +22,13 @@ builder.Services.AddSingleton(s =>
     return client;
 });
 
+builder.Services.AddSingleton(s =>
+{
+    var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
+    var baseUri = s.GetRequiredService<NavigationManager>().BaseUri;
+    var channel = GrpcChannel.ForAddress(baseUri, new GrpcChannelOptions { HttpClient = httpClient });
+    var client = new MovieContract.MovieContractClient(channel);
+    return client;
+});
+
 await builder.Build().RunAsync();

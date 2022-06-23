@@ -36,7 +36,7 @@ namespace MediaLibrary.Client.Shared
 
         private async Task GetModel()
         {
-            var grpcItem = await Service.GetAsync(new ItemRequest { Id = Id }) ?? new();
+            var grpcItem = Id > 0 ? await Service.GetAsync(new ItemRequest { Id = Id }) : new();
             Model = Mapper.Map<TModel>(grpcItem);
         }
 

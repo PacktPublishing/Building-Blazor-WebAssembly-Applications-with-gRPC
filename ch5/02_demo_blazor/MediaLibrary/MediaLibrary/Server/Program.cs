@@ -49,6 +49,8 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapGrpcService<MediaLibrary.Server.Contracts.PersonContractService>()
     .EnableGrpcWeb();
+app.MapGrpcService<MediaLibrary.Server.Contracts.MovieContractService>()
+    .EnableGrpcWeb();
 
 app.MapFallbackToFile("index.html");
 

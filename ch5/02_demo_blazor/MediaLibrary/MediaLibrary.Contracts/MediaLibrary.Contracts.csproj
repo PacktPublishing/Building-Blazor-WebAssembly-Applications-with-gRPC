@@ -18,6 +18,7 @@
 	<ItemGroup>
 		<Protobuf Include="shared.proto" />
 		<Protobuf Include="person.proto" />
+		<Protobuf Include="movie.proto" />
 	</ItemGroup>
 
 </Project>
