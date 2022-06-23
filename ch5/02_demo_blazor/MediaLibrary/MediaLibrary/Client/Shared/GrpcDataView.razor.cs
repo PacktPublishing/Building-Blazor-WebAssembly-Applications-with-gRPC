@@ -1,37 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
-using System.Net.Http;
-using System.Net.Http.Json;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Components.Routing;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Http;
-using Microsoft.JSInterop;
-using MediaLibrary.Client;
-using MediaLibrary.Client.Shared;
-using Microsoft.AspNetCore.Components.Web.Virtualization;
 using MediaLibrary.Client.Shared.Model;
 using Grpc.Core;
 using MediaLibrary.Contracts;
+using AutoMapper;
 
 namespace MediaLibrary.Client.Shared
 {
-    public partial class GrpcDataView<TItem, TContractClient>
-    where TItem : class, MediaLibrary.Shared.Model.IModel, new()
-        where TContractClient : ClientBase<TContractClient>, IContractClient<TItem>
+    public partial class GrpcDataView<TItem, TContractItem, TContractClient>
+        where TItem : class, MediaLibrary.Shared.Model.IModel, new()
+        where TContractItem : class, new()
+        where TContractClient : ClientBase<TContractClient>, IContractClient<TContractItem>
     {
         [Inject]
         public NavigationManager Navigation { get; set; } = null!;
 
-        /// <summary>
-        /// Required service to get data.
-        /// </summary>
-        [EditorRequired]
-        [Parameter]
+        [Inject]
         public TContractClient Service { get; set; } = null!;
+
+        [Inject]
+        public IMapper Mapper { get; set; } = null!;
+
 
         public Table<TItem> Data { get; set; } = new Table<TItem>();
 
@@ -44,7 +32,7 @@ namespace MediaLibrary.Client.Shared
 
             while (await stream.MoveNext(default))
             {
-                var item = stream.Current;
+                var item = Mapper.Map<TItem>(stream.Current);
                 var row = new TableRow<TItem>(item);
 
                 foreach (var column in Data.Columns)
