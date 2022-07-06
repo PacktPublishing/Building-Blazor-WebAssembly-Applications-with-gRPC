@@ -6,10 +6,35 @@
     <p><label>Year: <InputNumber @bind-Value="model.Year" /></label></p>
     <p><label>Description: <InputText @bind-Value="model.Description" /></label></p>
     <p><label>DirectorId: <InputNumber @bind-Value="model.DirectorId" /></label></p>
-    <p><label>MusicComposerId: <InputNumber @bind-Value="model.MusicComposerId" /></label></p>
+    @*<p><label>MusicComposerId: <InputNumber @bind-Value="model.MusicComposerId" /></label></p>*@
+    <p>
+        <label>Categories:</label>
+        <InputSelect Value="CatId(model)" @onchange="(e) => OnSelectChange(e, model)" ValueExpression="() => model.MusicComposerId">
+            <option value="0">Action</option>
+            <option value="1">Comedy</option>
+            <option value="2">Drama</option>
+        </InputSelect>
+    </p>
 </GrpcDataForm>
 
 @code {
     [Parameter]
     public int Id { get; set; }
+
+    private int? CatId(MovieModel model)
+    {
+        return model.Categories.Count > 0 ? (int?)model.Categories[0] : null;
+    }
+
+    private void OnSelectChange(ChangeEventArgs e, MovieModel model)
+    {
+        model.Categories = new List<MediaLibrary.Shared.CategoryType>();
+
+        if (e.Value == null)
+        {
+            return;
+        }
+
+        model.Categories.Add((MediaLibrary.Shared.CategoryType)int.Parse(e.Value.ToString()));
+    }
 }

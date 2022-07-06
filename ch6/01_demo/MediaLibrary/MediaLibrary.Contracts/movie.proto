@@ -16,7 +16,7 @@ service MovieContract {
 message Movie {
 	int32 id = 1;
 	string name = 2;
-	CategoryType categories = 3;
+	repeated CategoryType categories = 3;
 	int32 year = 4;
 	string description = 5;
 	google.protobuf.Int32Value directorId = 6;
