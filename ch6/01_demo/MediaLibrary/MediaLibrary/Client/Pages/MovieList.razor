@@ -1,0 +1,7 @@
+﻿@page "/movies"
+@using MediaLibrary.Contracts
+@using MediaLibrary.Shared.Model
+<GrpcDataView 
+    TItem="MovieModel"
+    TContractItem="Movie" 
+    TContractClient="MovieContract.MovieContractClient"/>

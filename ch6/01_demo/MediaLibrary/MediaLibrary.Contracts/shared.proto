@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+package contracts.shared;
+option csharp_namespace = "MediaLibrary.Contracts";
+
+message ItemRequest {
+	int32 id = 1;
+}
+
+message CreateResponse {
+	int32 id = 1;
+	string path = 2;
+}
+
+message GenericResponse {
+	bool success = 1;
+}
+
+message Empty {}

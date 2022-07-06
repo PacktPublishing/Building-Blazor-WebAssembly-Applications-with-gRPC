@@ -1,0 +1,7 @@
+﻿@page "/persons"
+@using MediaLibrary.Contracts
+@using MediaLibrary.Shared.Model
+<GrpcDataView 
+    TItem="PersonModel" 
+    TContractItem="Person" 
+    TContractClient="PersonContract.PersonContractClient" />

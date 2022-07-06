@@ -1,0 +1,14 @@
+﻿@page "/persons/{Id:int}"
+@using MediaLibrary.Contracts
+@using MediaLibrary.Shared.Model
+<GrpcDataForm Id="Id" TModel="PersonModel" TContractItem="Person" TContractClient="PersonContract.PersonContractClient" Context="model">
+    <p><label>Name: <InputText @bind-Value="model.Name" /></label></p>
+    <p><label>BirthDay: <InputDate @bind-Value="model.BirthDay" /></label></p>
+    <p><label>BirthPlace: <InputText @bind-Value="model.BirthPlace" /></label></p>
+    <p><label>Biography: <InputTextArea @bind-Value="model.Biography" /></label></p>
+</GrpcDataForm>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+}

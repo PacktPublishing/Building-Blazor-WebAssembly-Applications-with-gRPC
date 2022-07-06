@@ -1,0 +1,38 @@
+﻿syntax = "proto3";
+package contracts;
+option csharp_namespace = "MediaLibrary.Contracts";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "shared.proto";
+
+service MovieContract {
+	rpc Create(Movie) returns (contracts.shared.CreateResponse);
+	rpc Update(Movie) returns (contracts.shared.GenericResponse);
+	rpc Get(contracts.shared.ItemRequest) returns (Movie);
+	rpc GetList(contracts.shared.Empty) returns (stream Movie);
+	rpc Delete(contracts.shared.ItemRequest) returns (contracts.shared.GenericResponse);
+}
+
+message Movie {
+	int32 id = 1;
+	string name = 2;
+	CategoryType categories = 3;
+	int32 year = 4;
+	string description = 5;
+	google.protobuf.Int32Value directorId = 6;
+	google.protobuf.Int32Value musicComposerId = 7;	
+	repeated int32 actorIds = 8;
+}
+
+enum CategoryType {
+	Action = 0;
+    Comedy = 1;
+    Drama = 2;
+    Fantasy = 3;
+    SciFi = 4;
+    Horror = 5;
+    Mystery = 6;
+    Romance = 7;
+    Thriller = 8;
+    Western = 9;
+}

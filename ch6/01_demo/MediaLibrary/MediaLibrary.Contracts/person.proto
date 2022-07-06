@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+package contracts;
+option csharp_namespace = "MediaLibrary.Contracts";
+import "google/protobuf/timestamp.proto";
+import "shared.proto";
+
+service PersonContract {
+	rpc Create(Person) returns (contracts.shared.CreateResponse);
+	rpc Update(Person) returns (contracts.shared.GenericResponse);
+	rpc Get(contracts.shared.ItemRequest) returns (Person);
+	rpc GetList(contracts.shared.Empty) returns (stream Person);
+	rpc Delete(contracts.shared.ItemRequest) returns (contracts.shared.GenericResponse);
+}
+
+message Person {
+	int32 id = 1;
+	string name = 2;
+	google.protobuf.Timestamp birthDay = 3;
+	string birthPlace = 4;
+	string biography = 5;
+	repeated int32 moviesIds = 6;
+}
