@@ -16,6 +16,7 @@ public class PersonContractService : PersonContract.PersonContractBase, IContrac
         _personService = personService;
         _mapper = mapper;
     }
+
     public override async Task<CreateResponse> Create(Person request, ServerCallContext context)
     {
         var model = _mapper.Map<PersonModel>(request);

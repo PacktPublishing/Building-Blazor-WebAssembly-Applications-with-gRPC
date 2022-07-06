@@ -5,6 +5,7 @@ using MediaLibrary.Server.Services;
 using MediaLibrary.Shared.Model;
 
 namespace MediaLibrary.Server.Contracts;
+
 public class MovieContractService : MovieContract.MovieContractBase, IContractService<Movie>
 {
     private readonly MovieService _movieService;
