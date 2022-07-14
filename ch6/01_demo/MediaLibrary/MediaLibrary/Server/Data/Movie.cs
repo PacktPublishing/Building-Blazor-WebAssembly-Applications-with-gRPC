@@ -1,5 +1,6 @@
 ﻿namespace MediaLibrary.Server.Data;
 
+[UseCustomGenerator(true)]
 public class Movie : BaseEntity
 {
     public List<MovieCategory> Categories { get; set; } = new List<MovieCategory>();

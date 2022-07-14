@@ -1,5 +1,6 @@
 ﻿namespace MediaLibrary.Server.Data;
 
+[UseCustomGenerator(false)]
 public class Person : BaseEntity
 {
     public DateTime BirthDay { get; set; }
