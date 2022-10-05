@@ -31,9 +31,9 @@ The code will look like the following:
 @{ var i = 0; }
 @while (i < chapters.Length)
 {
-var chapter = chapters[i];
-<h2>Chapter no. @chapter.Number: @chapter.Title</h2>
-i++;
+    var chapter = chapters[i];
+    <h2>Chapter no. @chapter.Number: @chapter.Title</h2>
+    i++;
 }
 ```
 
