@@ -64,7 +64,3 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 **Václav Pekárek**
 is an experienced developer with 10 years of web development experience using .NET and C#. He is also a Microsoft Certified Professional.Václav is the owner of a small IT company in Ostrava, Czech Republic. You can contact him on his LinkedIn page, on Twitter at @vaclavpekarek, or via email at vaclav.pekarek@evolutit.cz.
-### Download a free PDF
-
- <i>If you have already purchased a print or Kindle version of this book, you can get a DRM-free PDF version at no cost.<br>Simply click on the link to claim your free PDF.</i>
-<p align="center"> <a href="https://packt.link/free-ebook/9781804610558">https://packt.link/free-ebook/9781804610558 </a> </p>
